@@ -19,11 +19,16 @@ app.set(exhbs({
   extname: 'hbs',
   partialsDir: [
     path.join(__dirname, "views/partials")
-  ]
+  ],
+  runtimeOptions: {
+    allowProtoMethodsByDefault: true,
+    allowProtoPropertiesByDefault: true
+  }
 }))
 
-const pass = 'family1225vsburxon'
+require('./helper/db')()
 
+// const pass = 'family1225vsburxon'
 
 app.use(logger("dev"));
 app.use(express.json());

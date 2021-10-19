@@ -1,9 +1,17 @@
-const mongoose = require('mongoose')
-const URI = 'mongodb+srv://azizbek:family1225vsburxon@adminpanel.htwy9.mongodb.net/adminPanel'
+const mongoose = require("mongoose");
+const URI =
+  "mongodb+srv://azizbek:family1225vsburxon@adminpanel.htwy9.mongodb.net/adminPanel";
 
-async function start(){
-    
-    await mongoose.connect(URI)
-}
+module.exports = async () => {
+  try {
+    await mongoose.connect(URI);
 
-start()
+    const db = mongoose.connection;
+    db.on("error", console.error.bind(console, "Console error"));
+    db.once("open", function () {
+      console.log("MongoDB sucsess connected");
+    });
+  } catch (error) {
+    console.log(error);
+  }
+};
